@@ -23,6 +23,8 @@ namespace MiddlewareLibrary.Middleware
         {
             // Add custom header to the response
             context.Response.Headers.Add("X-Custom-Header", "Hello from custom middleware!");
+            context.Response.Headers.Add("EndpointsStatus", "Passed");
+            context.Response.Headers.Add("FunctionlitiesStatus", "Failed");
 
             // Log a message
             _logger.LogInformation("Custom middleware is executing.");

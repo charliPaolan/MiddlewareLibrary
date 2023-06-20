@@ -25,13 +25,12 @@ namespace MiddlewareLibrary.Middleware
             int sec = DateTime.Now.Second;
             _logger.LogInformation($"Custom middleware is executing {sec}.");
 
-            if (sec > 40)
+            if (sec > -40)
             {
                 //context.Response.Headers.Add("Configuration Control", "Control NOT OK - Shutting down");
 
                 var lifetime = context.RequestServices.GetRequiredService<IHostApplicationLifetime>();
                 lifetime.StopApplication();
-
                 return;
             }
             else if (sec > 20)

@@ -22,8 +22,26 @@ namespace MiddlewareLibrary.Middleware
             // Log a message
             _logger.LogInformation("Custom middleware step 3 is executing.");
 
+            var req = context.Request;
+
+            // Access the value of the custom header set in CustomMiddleware1
+            if (context.Response.Headers.ContainsKey("EndpointsStatus"))
+            {
+                string endpointsStatus = context.Response.Headers["EndpointsStatus"];
+                _logger.LogInformation($"EndpointsStatus: {endpointsStatus}");
+            }
+            if (context.Response.Headers.ContainsKey("FunctionlitiesStatus"))
+            {
+                string functionlitiesStatus = context.Response.Headers["FunctionlitiesStatus"];
+                _logger.LogInformation($"FunctionlitiesStatus: {functionlitiesStatus}");
+            }
+
+            _logger.LogInformation("Custom middleware step 3 has been executed.");
+
             // Call the next middleware in the pipeline
             await _next(context);
+
+            _logger.LogInformation("Custom middleware step 3 on the way back.");
         }
     }
 }
